@@ -1,8 +1,7 @@
-package main
+package graph
 
 import (
 	"container/heap"
-	"fmt"
 	"math"
 )
 
@@ -71,7 +70,7 @@ func (g *AdjacencyMatrixGraph) Dijkstra(start int) ([]int, []int) {
 	for pq.Len() > 0 {
 		cur := heap.Pop(pq).(*Node)
 		if !visited[cur.vertex] {
-			visited[cur.vertex] = true
+			visited[cur.vertex] = true //优先队列在距离最小时标记，其他情况过滤
 			for _, e := range g.edges[cur.vertex] {
 				if newDist := dist[cur.vertex] + e.weight; newDist < dist[e.to] {
 					dist[e.to] = newDist
@@ -94,7 +93,7 @@ func (g *AdjacencyMatrixGraph) BFS(start, end int) []int {
 	for i := 0; i < g.vertices; i++ {
 		prev[i] = -1
 	}
-	visited[start] = true
+	visited[start] = true //队列需要入队前标记
 
 	pq := []int{start}
 	for len(pq) > 0 {
@@ -170,23 +169,4 @@ func getPath(prev []int, start, end int) []int {
 	}
 
 	return path
-}
-
-func main() {
-	g := &AdjacencyMatrixGraph{
-		vertices: 9,
-		edges:    make(map[int][]Edge),
-	}
-	g.edges[0] = []Edge{{1, 3}, {5, 4}}
-	g.edges[1] = []Edge{{0, 3}, {2, 8}, {6, 6}, {8, 5}}
-	g.edges[2] = []Edge{{1, 8}, {3, 12}, {8, 2}}
-	g.edges[3] = []Edge{{2, 11}, {4, 10}, {6, 14}, {7, 6}, {8, 11}}
-	g.edges[4] = []Edge{{3, 10}, {5, 18}, {7, 1}}
-	g.edges[5] = []Edge{{0, 4}, {4, 18}, {6, 7}}
-	g.edges[6] = []Edge{{1, 6}, {3, 14}, {5, 7}, {7, 9}}
-	g.edges[7] = []Edge{{3, 6}, {4, 1}, {6, 9}}
-	g.edges[8] = []Edge{{1, 5}, {2, 2}, {3, 11}}
-
-	mst := g.PrimMST(0)
-	fmt.Println(mst)
 }
