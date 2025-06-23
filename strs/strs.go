@@ -49,3 +49,19 @@ func findAnagrams(s string, p string) []int {
 
 	return rets
 }
+
+// https://leetcode.cn/problems/minimum-window-substring/description/?envType=study-plan-v2&envId=top-100-liked
+func minWindow(s string, t string) string {
+	// s = "ADOBECODEBANC", t = "ABC"
+	mt, cnt := make(map[byte]int), make(map[byte]int)
+	n := len(t)
+	for _, v := range []byte(t) {
+		mt[v]++
+	}
+	minLen := 0
+	for i, j := 0, 0; j < len(s); {
+		for k := i; k < j; k++ {
+			cnt[s[k]]++
+		}
+	}
+}

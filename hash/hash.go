@@ -65,3 +65,20 @@ func longestConsecutive(nums []int) int {
 
 	return cnt
 }
+
+// https://leetcode.cn/problems/subarray-sum-equals-k/description/?envType=study-plan-v2&envId=top-100-liked
+func subarraySum(nums []int, k int) int {
+	// nums = [1,-1,0], k = 0
+	pre := 0
+	mPre := make(map[int]int)
+	total := 0
+	mPre[0] = 1
+	for _, v := range nums {
+		pre += v
+		if v2, ok := mPre[pre-k]; ok {
+			total += v2
+		}
+		mPre[pre]++
+	}
+	return total
+}

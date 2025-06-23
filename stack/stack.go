@@ -53,11 +53,46 @@ func calculate(s string) (ans int) {
 
 // https://leetcode.cn/problems/next-greater-element-i/description/
 func nextGreaterElement(nums1 []int, nums2 []int) []int {
-	// nums1 = [4,1,2], nums2 = [1,3,4,2].
+	// nums1 = [4,1,2], nums2 = [1,3,4,2]
+	st := []int{}
+	mp := make(map[int]int)
+	for i := len(nums2) - 1; i >= 0; i-- {
+		for len(st) > 0 && nums2[i] > st[len(st)-1] {
+			st = st[:len(st)-1]
+		}
+		if len(st) > 0 {
+			mp[nums2[i]] = st[len(st)-1]
+		}
+		st = append(st, nums2[i])
+	}
 
-	for i := 0; i < len(nums1); i++ {
-		for j := i + 1; j < len(nums2); j++ {
-
+	for i := range nums1 {
+		if v, ok := mp[nums1[i]]; ok {
+			nums1[i] = v
+		} else {
+			nums1[i] = -1
 		}
 	}
+
+	return nums1
+}
+
+// https://leetcode.cn/problems/daily-temperatures/description/
+func dailyTemperatures(temperatures []int) []int {
+	// temperatures = [89, 62, 70, 58, 47, 47, 46, 76, 100, 70]
+	st := []int{}
+	arr := make([]int, len(temperatures))
+	for i := len(temperatures) - 1; i >= 0; i-- {
+		for len(st) > 0 && temperatures[i] >= temperatures[st[len(st)-1]] {
+			st = st[:len(st)-1]
+		}
+		if len(st) > 0 {
+			arr[i] = st[len(st)-1] - i
+		}
+		st = append(st, i)
+	}
+	for i := range temperatures {
+		temperatures[i] = arr[i]
+	}
+	return temperatures
 }

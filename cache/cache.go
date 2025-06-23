@@ -12,32 +12,30 @@ type Pair struct {
 	key, value int
 }
 
-func NewLRUCache(capacity int) *LRUCache {
-	return &LRUCache{
+func Constructor(capacity int) LRUCache {
+	return LRUCache{
 		capacity: capacity,
 		cache:    make(map[int]*list.Element),
 		list:     list.New(),
 	}
 }
 
-func (c *LRUCache) Put(key, value int) {
-	if elem, ok := c.cache[key]; ok {
-		c.list.MoveToFront(elem)
+func (this *LRUCache) Put(key, value int) {
+	if elem, ok := this.cache[key]; ok {
+		this.list.MoveToFront(elem)
 		elem.Value = Pair{key, value}
 	} else {
-		if c.list.Len() >= c.capacity {
-			delete(c.cache, c.list.Back().Value.(Pair).key)
-			c.list.Remove(c.list.Back())
+		this.cache[key] = this.list.PushFront(Pair{key, value})
+		if this.list.Len() > this.capacity {
+			delete(this.cache, this.list.Remove(this.list.Back()).(Pair).key)
 		}
-		c.list.PushFront(list.Element{Value: Pair{key, value}})
-		c.cache[key] = c.list.Front()
 	}
 }
 
-func (c *LRUCache) Get(key int) (int, bool) {
-	if elem, ok := c.cache[key]; ok {
-		c.list.MoveToFront(elem)
-		return elem.Value.(Pair).value, true
+func (this *LRUCache) Get(key int) int {
+	if elem, ok := this.cache[key]; ok {
+		this.list.MoveToFront(elem)
+		return elem.Value.(Pair).value
 	}
-	return -1, false
+	return -1
 }

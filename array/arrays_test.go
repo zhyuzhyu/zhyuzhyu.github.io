@@ -127,3 +127,16 @@ func TestTrap(t *testing.T) {
 		fmt.Println(trap(c.nums))
 	}
 }
+
+func TestNumOfSubarrays(t *testing.T) {
+	cases := []struct {
+		nums         []int
+		k, threshold int
+	}{
+		{[]int{2, 2, 2, 2, 5, 5, 5, 8}, 3, 4},
+	}
+	for _, c := range cases {
+		fmt.Println(c.nums, c.k, c.threshold)
+		fmt.Println(numOfSubarrays(c.nums, c.k, c.threshold))
+	}
+}

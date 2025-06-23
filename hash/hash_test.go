@@ -45,3 +45,18 @@ func TestLongestConsecutive(t *testing.T) {
 		fmt.Println(longestConsecutive(c.nums))
 	}
 }
+
+func TestSubarraySum(t *testing.T) {
+	cases := []struct {
+		nums []int
+		k    int
+	}{
+		//{nums: []int{1, 1, 1}, k: 2},
+		//{nums: []int{1, 2, 3}, k: 3},
+		{nums: []int{1, -1, 0}, k: 0},
+	}
+	for _, c := range cases {
+		fmt.Println(c.nums, c.k)
+		fmt.Println(subarraySum(c.nums, c.k))
+	}
+}

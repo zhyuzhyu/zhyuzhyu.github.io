@@ -167,3 +167,27 @@ func trap(height []int) int {
 
 	return ret
 }
+
+// https://leetcode.cn/problems/number-of-sub-arrays-of-size-k-and-average-greater-than-or-equal-to-threshold/description/
+func numOfSubarrays(arr []int, k int, threshold int) int {
+	// arr = [2,2,2,2,5,5,5,8], k = 3, threshold = 4
+	sum, total := 0, 0
+	for i := 0; i < len(arr); i++ {
+		sum += arr[i]
+		if i < k-1 {
+			continue
+		}
+		if sum >= threshold*k {
+			total++
+		}
+		sum -= arr[i-k+1]
+	}
+	return total
+}
+
+// https://leetcode.cn/problems/maximum-subarray/description/?envType=study-plan-v2&envId=top-100-liked
+func maxSubArray(nums []int) int {
+	// nums = [-2,1,-3,4,-1,2,1,-5,4]
+	var arr sort.IntSlice
+
+}

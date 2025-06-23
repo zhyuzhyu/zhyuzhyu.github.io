@@ -6,7 +6,7 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
-func LowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
+func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
 	visited := make(map[*TreeNode]bool)
 	prev := make(map[*TreeNode]*TreeNode)
 	pq := []*TreeNode{root}
