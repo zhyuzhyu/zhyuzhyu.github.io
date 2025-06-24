@@ -6,34 +6,17 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
+// https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/solutions/
 func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
-	visited := make(map[*TreeNode]bool)
-	prev := make(map[*TreeNode]*TreeNode)
-	pq := []*TreeNode{root}
-	visited[root] = true
-	found := 0
-	for len(pq) > 0 {
-		cur := pq[0]
-		pq = pq[1:]
-		if cur.Val == p.Val || cur.Val == q.Val {
-			found++
-			if found == 2 {
-				break
-			}
-		}
-		if !visited[cur.Left] {
-			prev[cur.Left] = cur
-			pq = append(pq, cur.Left)
-		}
-		if !visited[cur.Right] {
-			prev[cur.Right] = cur
-			pq = append(pq, cur.Right)
-		}
+	if root == nil || root.Val == p.Val || root.Val == q.Val {
+		return root
 	}
-
-	for i := prev[p]; i != nil; i = prev[i] {
-
+	l := lowestCommonAncestor(root.Left, p, q)
+	r := lowestCommonAncestor(root.Right, p, q)
+	if l != nil && r != nil {
+		return root
+	} else if l != nil {
+		return l
 	}
-
-	return prev[q]
+	return r
 }
