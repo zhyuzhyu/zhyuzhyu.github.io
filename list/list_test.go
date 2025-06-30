@@ -55,3 +55,15 @@ func TestMergeTwoLists(t *testing.T) {
 		printList(mergeTwoLists(c.list1, c.list2))
 	}
 }
+
+func TestReverseList(t *testing.T) {
+	cases := []struct {
+		list *ListNode
+	}{
+		{genList([]int{1, 2, 3, 4, 5})},
+	}
+	for _, c := range cases {
+		printList(c.list)
+		printList(reverseList(c.list))
+	}
+}

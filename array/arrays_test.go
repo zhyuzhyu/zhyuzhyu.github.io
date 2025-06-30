@@ -140,3 +140,17 @@ func TestNumOfSubarrays(t *testing.T) {
 		fmt.Println(numOfSubarrays(c.nums, c.k, c.threshold))
 	}
 }
+
+func TestSortColors(t *testing.T) {
+	cases := []struct {
+		nums []int
+	}{
+		{[]int{2, 0, 2, 1, 1, 0}},
+		{[]int{2, 0, 1}},
+	}
+	for _, c := range cases {
+		fmt.Println(c.nums)
+		sortColors(c.nums)
+		fmt.Println(c.nums)
+	}
+}

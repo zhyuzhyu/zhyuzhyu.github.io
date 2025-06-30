@@ -4,6 +4,7 @@ import "sort"
 
 // https://leetcode.cn/problems/merge-sorted-array/?envType=study-plan-v2&envId=top-interview-150
 func arraysMerge(nums1 []int, m int, nums2 []int, n int) {
+	// nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
 	for m > 0 && n > 0 {
 		if nums1[m-1] >= nums2[n-1] { //tail copy
 			nums1[m+n-1] = nums1[m-1]
@@ -20,6 +21,7 @@ func arraysMerge(nums1 []int, m int, nums2 []int, n int) {
 
 // https://leetcode.cn/problems/remove-element/description/?envType=study-plan-v2&envId=top-interview-150
 func removeElement(nums []int, val int) int {
+	// nums = [3,2,2,3], val = 3
 	left := 0
 	for i := range nums {
 		if nums[i] != val {
@@ -32,6 +34,7 @@ func removeElement(nums []int, val int) int {
 
 // https://leetcode.cn/problems/remove-duplicates-from-sorted-array/submissions/16825423/?envType=study-plan-v2&envId=top-interview-150
 func removeDuplicates(nums []int) int {
+	// nums = [1,1,2]
 	left := 0
 	for i := range nums {
 		if i+1 == len(nums) || nums[i] != nums[i+1] {
@@ -45,6 +48,7 @@ func removeDuplicates(nums []int) int {
 
 // https://leetcode.cn/problems/remove-duplicates-from-sorted-array-ii/description/?envType=study-plan-v2&envId=top-interview-150
 func removeDuplicates2(nums []int) int {
+	// nums = [1,1,1,2,2,3]
 	n := len(nums)
 	if n <= 2 {
 		return n
@@ -62,6 +66,7 @@ func removeDuplicates2(nums []int) int {
 
 // https://leetcode.cn/problems/majority-element/description/?envType=study-plan-v2&envId=top-interview-150
 func majorityElement(nums []int) int {
+	// nums = [3,2,3]
 	var candi, cnt int
 	for _, v := range nums {
 		if cnt == 0 {
@@ -78,6 +83,7 @@ func majorityElement(nums []int) int {
 
 // https://leetcode.cn/problems/move-zeroes/description/?envType=study-plan-v2&envId=top-100-liked
 func moveZeroes(nums []int) {
+	// [0,1,0,3,12]
 	left := 0
 	for i := range nums {
 		if nums[i] != 0 {
@@ -92,6 +98,7 @@ func moveZeroes(nums []int) {
 
 // https://leetcode.cn/problems/container-with-most-water/description/?envType=study-plan-v2&envId=top-100-liked
 func maxArea(height []int) int {
+	// [1,8,6,2,5,4,8,3,7]
 	var mArea, area int
 
 	for i, j := 0, len(height)-1; i < j; {
@@ -112,13 +119,14 @@ func maxArea(height []int) int {
 
 // https://leetcode.cn/problems/3sum/description/?envType=study-plan-v2&envId=top-100-liked
 func threeSum(nums []int) [][]int {
+	// [-1,0,1,2,-1,-4]
 	rets := make([][]int, 0)
 	sort.Ints(nums)
 	if len(nums) < 3 {
 		return rets
 	}
 	for i := 0; i < len(nums)-2; i++ {
-		if i > 0 && nums[i] == nums[i-1] {
+		if i > 0 && nums[i] == nums[i-1] { //outer be different
 			continue
 		}
 		for j, k := i+1, len(nums)-1; j < k; {
@@ -186,8 +194,41 @@ func numOfSubarrays(arr []int, k int, threshold int) int {
 }
 
 // https://leetcode.cn/problems/maximum-subarray/description/?envType=study-plan-v2&envId=top-100-liked
-func maxSubArray(nums []int) int {
-	// nums = [-2,1,-3,4,-1,2,1,-5,4]
-	var arr sort.IntSlice
+//func maxSubArray(nums []int) int {
+//	// nums = [-2,1,-3,4,-1,2,1,-5,4]
+//	var arr sort.IntSlice
+//
+//}
 
+// https://leetcode.cn/problems/sort-colors/?envType=study-plan-v2&envId=top-100-liked
+func sortColors(nums []int) {
+	// nums = [2,0,2,1,1,0]
+	red := []int{}
+	white := []int{}
+	blue := []int{}
+	for _, v := range nums {
+		switch v {
+		case 0:
+			red = append(red, v)
+		case 1:
+			white = append(white, v)
+		case 2:
+			blue = append(blue, v)
+		}
+	}
+	nums = append(nums[:0], red...)
+	nums = append(nums, white...)
+	nums = append(nums, blue...)
+}
+
+// https://leetcode.cn/problems/next-permutation/description/?envType=study-plan-v2&envId=top-100-liked
+func nextPermutation(nums []int) {
+	// nums = [1,2,3]
+	//n := len(nums)
+	//rightMax := make([]int, n)
+	//rightMax[len(nums)-1] = 1
+	//for i := len(nums) - 2; i > 0; i-- {
+	//	rightMax[i] = max(nums[i+1], nums[i])
+	//
+	//}
 }

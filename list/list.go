@@ -73,6 +73,39 @@ func mergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode {
 	return dummy.Next
 }
 
+// n + m = m + n
+// https://leetcode.cn/problems/intersection-of-two-linked-lists/description/?envType=study-plan-v2&envId=top-100-liked
+func getIntersectionNode(headA, headB *ListNode) *ListNode {
+	// intersectVal = 8, listA = [4,1,8,4,5], listB = [5,6,1,8,4,5], skipA = 2, skipB = 3
+	if headA == nil || headB == nil {
+		return nil
+	}
+	pa, pb := headA, headB
+	for pa != pb {
+		if pa != nil {
+			pa = pa.Next
+		} else {
+			pa = headB
+		}
+		if pb != nil {
+			pb = pb.Next
+		} else {
+			pb = headA
+		}
+	}
+	return pa
+}
+
+// head insert
+// https://leetcode.cn/problems/reverse-linked-list/description/?envType=study-plan-v2&envId=top-100-liked
+func reverseList(head *ListNode) *ListNode {
+	var tail *ListNode
+	for ; head != nil; head = head.Next {
+		tail = &ListNode{Val: head.Val, Next: tail}
+	}
+	return tail
+}
+
 func genList(nums []int) *ListNode {
 	n := len(nums)
 	if n == 0 {

@@ -9,7 +9,7 @@ type Edge struct {
 	to, weight int
 }
 
-// 邻接矩阵
+// 邻接表
 type AdjacencyMatrixGraph struct {
 	vertices int
 	edges    map[int][]Edge
